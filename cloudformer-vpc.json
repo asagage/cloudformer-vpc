@@ -16,7 +16,11 @@
     },
     "Subnet" : {
       "Description" : "Subnet to deploy the instance into",
-      "Type" : "List<AWS::EC2::Subnet::Id>"
+      "Type" : "AWS::EC2::Subnet::Id"
+    },
+    "myVPC" : {
+      "Description" : "VPC to place SecurityGroup into",
+      "Type" : "AWS::EC2::VPC::Id"
     }
   },
 
@@ -326,7 +330,9 @@
         "GroupDescription" : "Enable HTTPS access via port 443",
         "SecurityGroupIngress" : [
           {"IpProtocol" : "tcp", "FromPort" : "443", "ToPort" : "443", "CidrIp" : "0.0.0.0/0"}
-        ]
+        ],
+        "VpcId" : { "Ref" : "myVPC" }
+
       }
     }
   },
